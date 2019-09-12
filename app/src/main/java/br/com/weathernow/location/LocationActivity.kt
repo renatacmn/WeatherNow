@@ -4,7 +4,9 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.location.Location
+import android.net.Uri.fromParts
 import android.os.Bundle
+import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import br.com.weathernow.BaseActivity
@@ -42,7 +44,7 @@ abstract class LocationActivity : BaseActivity() {
             if ((grantResults.isNotEmpty() && grantResults[0] == PERMISSION_GRANTED)) {
                 onLocationPermissionGranted()
             } else {
-                showLocationPermissionDeniedUi()
+                showLocationPermissionPermanentlyDeniedUi()
             }
         }
     }
@@ -53,6 +55,8 @@ abstract class LocationActivity : BaseActivity() {
 
     abstract fun showLocationPermissionDeniedUi()
 
+    abstract fun showLocationPermissionPermanentlyDeniedUi()
+
     // Protected methods
 
     protected fun checkPermissionAndGetLastKnownLocation(listener: LatLongListener) {
@@ -60,9 +64,7 @@ abstract class LocationActivity : BaseActivity() {
         checkLocationPermission()
     }
 
-    // Private methods
-
-    private fun checkGooglePlayServices() {
+    protected fun checkGooglePlayServices() {
         val resultCode = googleApiAvailability.isGooglePlayServicesAvailable(this)
         if (resultCode != ConnectionResult.SUCCESS) {
             if (googleApiAvailability.isUserResolvableError(resultCode)) {
@@ -72,6 +74,15 @@ abstract class LocationActivity : BaseActivity() {
             }
         }
     }
+
+    protected fun goToSettings() {
+        val intent = Intent(ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = fromParts("package", packageName, null)
+        intent.data = uri
+        startActivityForResult(intent, REQUEST_PERMISSION_SETTING_CODE)
+    }
+
+    // Private methods
 
     private fun onGoogleServicesResolvableError(errorCode: Int) {
         googleApiAvailability.getErrorDialog(this, errorCode, GOOGLE_PLAY_SERVICES_CODE) {
@@ -153,6 +164,7 @@ abstract class LocationActivity : BaseActivity() {
     companion object {
         private const val GOOGLE_PLAY_SERVICES_CODE = 1
         private const val LOCATION_PERMISSION_CODE = 2
+        const val REQUEST_PERMISSION_SETTING_CODE = 3
     }
 
 }

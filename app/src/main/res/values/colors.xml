@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#b388ff</color>
+    <color name="colorPrimaryDark">#7c4dff</color>
+    <color name="colorAccent">#7B1FA2</color>
+
+    <color name="forecast_bg_gradient_start_color">@color/colorPrimary</color>
+    <color name="forecast_bg_gradient_end_color">@color/colorPrimaryDark</color>
 </resources>

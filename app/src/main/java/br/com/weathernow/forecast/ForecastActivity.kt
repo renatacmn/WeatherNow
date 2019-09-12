@@ -1,13 +1,17 @@
 package br.com.weathernow.forecast
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import br.com.weathernow.R
 import br.com.weathernow.api.models.Forecast
 import br.com.weathernow.forecast.ForecastViewState.*
 import br.com.weathernow.location.LocationActivity
+import kotlinx.android.synthetic.main.activity_weather.*
+import kotlinx.android.synthetic.main.activity_weather_state_error.*
+import kotlinx.android.synthetic.main.activity_weather_state_success.*
 
 class ForecastActivity : LocationActivity(), LocationActivity.LatLongListener {
 
@@ -18,6 +22,13 @@ class ForecastActivity : LocationActivity(), LocationActivity.LatLongListener {
         setContentView(R.layout.activity_weather)
         init()
         checkPermissionAndGetLastKnownLocation(this)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_PERMISSION_SETTING_CODE) {
+            checkPermissionAndGetLastKnownLocation(this)
+        }
     }
 
     // LocationActivity overrides
@@ -34,11 +45,18 @@ class ForecastActivity : LocationActivity(), LocationActivity.LatLongListener {
     }
 
     override fun showGooglePlayServicesCanceledUi() {
-        Toast.makeText(this, "showGooglePlayServicesCanceledUi", Toast.LENGTH_SHORT).show()
+        showError(getString(R.string.google_play_services_fix_canceled_message))
+        { checkGooglePlayServices() }
     }
 
     override fun showLocationPermissionDeniedUi() {
-        Toast.makeText(this, "showLocationPermissionDeniedUi", Toast.LENGTH_SHORT).show()
+        showError(getString(R.string.location_permission_rationale_dialog_message))
+        { checkPermissionAndGetLastKnownLocation(this) }
+    }
+
+    override fun showLocationPermissionPermanentlyDeniedUi() {
+        showError(getString(R.string.location_permission_rationale_dialog_message))
+        { goToSettings() }
     }
 
     // Private methods
@@ -46,7 +64,6 @@ class ForecastActivity : LocationActivity(), LocationActivity.LatLongListener {
     private fun init() {
         initializeViewModel()
         initializeObserver()
-        initializeViewComponents()
     }
 
     private fun initializeViewModel() {
@@ -55,10 +72,6 @@ class ForecastActivity : LocationActivity(), LocationActivity.LatLongListener {
 
     private fun initializeObserver() {
         viewModel.getForecastViewState().observe(this, Observer(this::updateUi))
-    }
-
-    private fun initializeViewComponents() {
-
     }
 
     private fun updateUi(viewState: ForecastViewState) {
@@ -70,15 +83,41 @@ class ForecastActivity : LocationActivity(), LocationActivity.LatLongListener {
     }
 
     private fun showLoading() {
-        Toast.makeText(this, "showLoading", Toast.LENGTH_SHORT).show()
+        forecastLayoutStateLoading.visibility = View.VISIBLE
+        forecastLayoutStateSuccess.visibility = View.GONE
+        forecastLayoutStateError.visibility = View.GONE
     }
 
     private fun showForecast(forecast: Forecast) {
-        Toast.makeText(this, "showForecast", Toast.LENGTH_SHORT).show()
+        setForecastInfo(forecast)
+        forecastLayoutStateLoading.visibility = View.GONE
+        forecastLayoutStateSuccess.visibility = View.VISIBLE
+        forecastLayoutStateError.visibility = View.GONE
+    }
+
+    private fun setForecastInfo(forecast: Forecast) {
+        textTemperature.text =
+            getString(R.string.forecast_temperature, forecast.currently?.temperature)
+        textApparentTemperature.text = getString(
+            R.string.forecast_apparent_temperature, forecast.currently?.apparentTemperature
+        )
+        textSummary.text = forecast.currently?.summary
     }
 
     private fun showError(exception: Exception) {
-        Toast.makeText(this, "showError", Toast.LENGTH_SHORT).show()
+        showError(exception.message) { checkPermissionAndGetLastKnownLocation(this) }
+    }
+
+    private fun showError(message: String?, tryAgainAction: () -> Unit) {
+        forecastLayoutStateLoading.visibility = View.GONE
+        forecastLayoutStateSuccess.visibility = View.GONE
+        forecastLayoutStateError.visibility = View.VISIBLE
+        setErrorInfo(message, tryAgainAction)
+    }
+
+    private fun setErrorInfo(message: String?, tryAgainAction: () -> Unit) {
+        textErrorMessage.text = message
+        icTryAgain.setOnClickListener { tryAgainAction() }
     }
 
 }

@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_forecast_bg"
     tools:context=".forecast.ForecastActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/forecastLayoutStateLoading"
+        layout="@layout/activity_weather_state_loading"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/forecastLayoutStateSuccess"
+        layout="@layout/activity_weather_state_success"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/forecastLayoutStateError"
+        layout="@layout/activity_weather_state_error"
+        android:visibility="gone" />
+
+</FrameLayout>

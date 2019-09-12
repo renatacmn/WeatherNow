@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/forecast_horizontal_margin"
+    android:paddingTop="@dimen/forecast_vertical_margin"
+    android:paddingEnd="@dimen/forecast_horizontal_margin"
+    android:paddingBottom="@dimen/forecast_vertical_margin"
+    tools:background="@drawable/gradient_forecast_bg"
+    tools:context=".forecast.ForecastActivity">
+
+    <TextView
+        android:id="@+id/textSummary"
+        style="@style/SummaryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Summary" />
+
+    <TextView
+        android:id="@+id/textTemperature"
+        style="@style/TemperatureText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:layout_marginTop="@dimen/forecast_vertical_spacing"
+        app:layout_constraintEnd_toStartOf="@id/textTemperatureUnit"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textSummary"
+        tools:text="60" />
+
+    <TextView
+        android:id="@+id/textTemperatureUnit"
+        style="@style/TemperatureUnitText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/forecast_temperature_unit_top_margin"
+        android:text="@string/forecast_temperature_unit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textTemperature"
+        app:layout_constraintTop_toTopOf="@id/textTemperature" />
+
+    <TextView
+        android:id="@+id/textApparentTemperature"
+        style="@style/TextBodyLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forecast_apparent_temperature"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTemperature" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

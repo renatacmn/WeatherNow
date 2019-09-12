@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ForecastActivity - Success -->
+    <dimen name="forecast_vertical_margin">100dp</dimen>
+    <dimen name="forecast_horizontal_margin">8dp</dimen>
+    <dimen name="forecast_vertical_spacing">32dp</dimen>
+    <dimen name="forecast_temperature_unit_top_margin">16dp</dimen>
+    <dimen name="forecast_temperature_text_size">130sp</dimen>
+    <dimen name="forecast_temperature_unit_text_size">24sp</dimen>
+    <dimen name="forecast_summary_text_size">30sp</dimen>
+
+    <!-- ForecastActivity - Loading -->
+    <dimen name="forecast_progress_bar_size">60dp</dimen>
+
+    <!-- ForecastActivity - Error -->
+    <dimen name="forecast_ic_try_again_size">40dp</dimen>
+    <dimen name="forecast_error_text_size">24sp</dimen>
+
+</resources>

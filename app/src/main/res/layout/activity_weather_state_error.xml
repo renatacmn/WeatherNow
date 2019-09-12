@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/forecast_horizontal_margin"
+    android:paddingTop="@dimen/forecast_vertical_margin"
+    android:paddingEnd="@dimen/forecast_horizontal_margin"
+    android:paddingBottom="@dimen/forecast_vertical_margin"
+    tools:background="@drawable/gradient_forecast_bg"
+    tools:context=".forecast.ForecastActivity">
+
+    <TextView
+        android:id="@+id/textErrorMessage"
+        style="@style/ErrorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/icTryAgain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Error message" />
+
+    <ImageView
+        android:id="@+id/icTryAgain"
+        android:layout_width="@dimen/forecast_ic_try_again_size"
+        android:layout_height="@dimen/forecast_ic_try_again_size"
+        android:layout_marginTop="@dimen/forecast_vertical_spacing"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/content_description_ic_refresh"
+        android:src="@drawable/ic_refresh"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textErrorMessage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

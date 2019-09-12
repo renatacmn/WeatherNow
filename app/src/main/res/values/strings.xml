@@ -5,15 +5,27 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
-    <!-- LocationActivity -->
+    <!-- Content description -->
+    <string name="content_description_ic_refresh">Refresh</string>
+
+    <!-- LocationActivity - Google Services non-resolvable error dialog -->
     <string name="google_play_services_action_non_resolvable_error_dialog_title">Unsupported device</string>
     <string name="google_play_services_action_non_resolvable_error_dialog_message">Sorry, Google Play Services is not available on your device.</string>
 
+    <!-- LocationActivity - Permission rationale dialog -->
     <string name="location_permission_rationale_dialog_title">Permission needed</string>
-    <string name="location_permission_rationale_dialog_message">We need your location to show the current forecast. Try again?</string>
+    <string name="location_permission_rationale_dialog_message">WeatherNow needs your location to show the current forecast. Try again?</string>
 
     <!-- ForecastActivity -->
+    <string name="forecast_temperature">%.1f</string>
+    <string name="forecast_temperature_unit">ºF</string>
+    <string name="forecast_apparent_temperature">Real feel: %.1f ºF</string>
+
+    <!-- ForecastActivity - Last known location null dialog -->
     <string name="last_known_location_null_dialog_title">Could not obtain your location</string>
     <string name="last_known_location_null_dialog_message">Please verify if your location is enabled.</string>
+
+    <!-- ForecastActivity - Errors -->
+    <string name="google_play_services_fix_canceled_message">WeatherNow needs Google Play Services to continue</string>
 
 </resources>
