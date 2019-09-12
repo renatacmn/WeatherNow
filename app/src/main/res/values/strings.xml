@@ -26,6 +26,7 @@
     <string name="last_known_location_null_dialog_message">Please verify if your location is enabled.</string>
 
     <!-- ForecastActivity - Errors -->
-    <string name="google_play_services_fix_canceled_message">WeatherNow needs Google Play Services to continue</string>
+    <string name="google_play_services_fix_canceled_message">WeatherNow needs Google Play Services to continue.</string>
+    <string name="network_not_available_message">It seems that your device is not connected. Check you network connection.</string>
 
 </resources>

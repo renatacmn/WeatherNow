@@ -2,6 +2,7 @@ package br.com.weathernow
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -35,6 +36,13 @@ abstract class BaseActivity : AppCompatActivity() {
 
         builder.create()
         builder.show()
+    }
+
+    protected fun isNetworkAvailable(): Boolean {
+        val connectivityManager =
+            getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo = connectivityManager.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
     }
 
 }

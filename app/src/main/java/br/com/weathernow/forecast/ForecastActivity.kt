@@ -1,6 +1,5 @@
 package br.com.weathernow.forecast
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -21,20 +20,22 @@ class ForecastActivity : LocationActivity(), LocationActivity.LatLongListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
         init()
-        checkPermissionAndGetLastKnownLocation(this)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_PERMISSION_SETTING_CODE) {
-            checkPermissionAndGetLastKnownLocation(this)
-        }
+    override fun onResume() {
+        super.onResume()
+        checkPermissionAndGetLastKnownLocation(this)
     }
 
     // LocationActivity overrides
 
     override fun onLatLongReady(latitude: Double, longitude: Double) {
-        viewModel.getForecast(latitude, longitude)
+        if (isNetworkAvailable()) {
+            viewModel.getForecast(latitude, longitude)
+        } else {
+            showError(getString(R.string.network_not_available_message))
+            { viewModel.getForecast(latitude, longitude) }
+        }
     }
 
     override fun onLastKnownLocationError() {
