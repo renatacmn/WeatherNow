@@ -34,7 +34,7 @@ class ForecastActivity : LocationActivity(), LocationActivity.LatLongListener {
             viewModel.getForecast(latitude, longitude)
         } else {
             showError(getString(R.string.network_not_available_message))
-            { viewModel.getForecast(latitude, longitude) }
+            { checkPermissionAndGetLastKnownLocation(this) }
         }
     }
 
