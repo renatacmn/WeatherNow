@@ -13,6 +13,7 @@ import br.com.weathernow.location.LocationActivity
 import kotlinx.android.synthetic.main.activity_weather.*
 import kotlinx.android.synthetic.main.activity_weather_state_error.*
 import kotlinx.android.synthetic.main.activity_weather_state_success.*
+import kotlinx.coroutines.Dispatchers
 import java.io.IOException
 
 class ForecastActivity : LocationActivity(), LocationActivity.LatLongListener {
@@ -73,7 +74,7 @@ class ForecastActivity : LocationActivity(), LocationActivity.LatLongListener {
 
     private fun initializeViewModel() {
         viewModel = ViewModelProviders.of(this,
-            viewModelFactory { ForecastViewModel(repository) }
+            viewModelFactory { ForecastViewModel(repository, Dispatchers.IO) }
         ).get(ForecastViewModel::class.java)
     }
 

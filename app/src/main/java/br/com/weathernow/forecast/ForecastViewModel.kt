@@ -1,26 +1,25 @@
 package br.com.weathernow.forecast
 
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.weathernow.api.ForecastRepository
 import br.com.weathernow.forecast.ForecastViewState.*
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class ForecastViewModel(
-    private val repository: ForecastRepository
+    private val repository: ForecastRepository,
+    private val coroutineDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    @VisibleForTesting
-    internal val forecastViewStateLive = MutableLiveData<ForecastViewState>()
+    private val forecastViewStateLive = MutableLiveData<ForecastViewState>()
 
     fun getForecastViewState(): LiveData<ForecastViewState> = forecastViewStateLive
 
     fun getForecast(latitude: Double, longitude: Double) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(coroutineDispatcher) {
             forecastViewStateLive.postValue(Loading)
             try {
                 val forecast = repository.getForecast(latitude, longitude)
