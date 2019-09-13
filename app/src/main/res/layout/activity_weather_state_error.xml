@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="@dimen/forecast_horizontal_margin"
-    android:paddingTop="@dimen/forecast_vertical_margin"
-    android:paddingEnd="@dimen/forecast_horizontal_margin"
-    android:paddingBottom="@dimen/forecast_vertical_margin"
+    android:padding="@dimen/forecast_margin"
     tools:background="@drawable/gradient_forecast_bg"
     tools:context=".forecast.ForecastActivity">
 

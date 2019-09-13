@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="@dimen/forecast_horizontal_margin"
-    android:paddingTop="@dimen/forecast_vertical_margin"
-    android:paddingEnd="@dimen/forecast_horizontal_margin"
-    android:paddingBottom="@dimen/forecast_vertical_margin"
+    android:padding="@dimen/forecast_margin"
     tools:background="@drawable/gradient_forecast_bg"
     tools:context=".forecast.ForecastActivity">
 
@@ -16,9 +13,11 @@
         style="@style/SummaryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
         tools:text="Summary" />
 
     <TextView
@@ -26,8 +25,8 @@
         style="@style/TemperatureText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:includeFontPadding="false"
         android:layout_marginTop="@dimen/forecast_vertical_spacing"
+        android:includeFontPadding="false"
         app:layout_constraintEnd_toStartOf="@id/textTemperatureUnit"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
