@@ -13,6 +13,7 @@ import br.com.weathernow.location.LocationActivity
 import kotlinx.android.synthetic.main.activity_weather.*
 import kotlinx.android.synthetic.main.activity_weather_state_error.*
 import kotlinx.android.synthetic.main.activity_weather_state_success.*
+import java.io.IOException
 
 class ForecastActivity : LocationActivity(), LocationActivity.LatLongListener {
 
@@ -111,7 +112,11 @@ class ForecastActivity : LocationActivity(), LocationActivity.LatLongListener {
     }
 
     private fun showError(exception: Exception) {
-        showError(exception.message) { checkPermissionAndGetLastKnownLocation(this) }
+        var message = exception.message
+        if (exception is IOException) {
+            message = getString(R.string.network_not_available_message)
+        }
+        showError(message) { checkPermissionAndGetLastKnownLocation(this) }
     }
 
     private fun showError(message: String?, tryAgainAction: () -> Unit) {
