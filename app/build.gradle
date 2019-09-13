@@ -13,6 +13,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "BASE_URL", "\"https://api.darksky.net/\""
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -45,6 +48,11 @@ dependencies {
 
     // Tests
     testImplementation "junit:junit:4.12"
+    testImplementation "org.mockito:mockito-inline:2.8.47"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
     androidTestImplementation "androidx.test:runner:1.2.0"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
+    androidTestImplementation "androidx.test.ext:junit:1.1.1"
 }

@@ -4,10 +4,18 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 
 abstract class BaseActivity : AppCompatActivity() {
 
     // Protected methods
+
+    protected inline fun <VM : ViewModel> viewModelFactory(crossinline f: () -> VM) =
+        object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(aClass: Class<T>): T = f() as T
+        }
 
     protected fun showAlertDialog(
         title: String?,

@@ -5,6 +5,8 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import br.com.weathernow.R
+import br.com.weathernow.api.ForecastRepository
+import br.com.weathernow.api.NetworkUtil
 import br.com.weathernow.api.models.Forecast
 import br.com.weathernow.forecast.ForecastViewState.*
 import br.com.weathernow.location.LocationActivity
@@ -14,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_weather_state_success.*
 
 class ForecastActivity : LocationActivity(), LocationActivity.LatLongListener {
 
+    private val repository = ForecastRepository(NetworkUtil().api)
     private lateinit var viewModel: ForecastViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +71,9 @@ class ForecastActivity : LocationActivity(), LocationActivity.LatLongListener {
     }
 
     private fun initializeViewModel() {
-        viewModel = ViewModelProviders.of(this).get(ForecastViewModel::class.java)
+        viewModel = ViewModelProviders.of(this,
+            viewModelFactory { ForecastViewModel(repository) }
+        ).get(ForecastViewModel::class.java)
     }
 
     private fun initializeObserver() {

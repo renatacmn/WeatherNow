@@ -1,5 +1,6 @@
 package br.com.weathernow.forecast
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,11 +10,12 @@ import br.com.weathernow.forecast.ForecastViewState.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ForecastViewModel : ViewModel() {
+class ForecastViewModel(
+    private val repository: ForecastRepository
+) : ViewModel() {
 
-    private val repository = ForecastRepository()
-
-    private val forecastViewStateLive = MutableLiveData<ForecastViewState>()
+    @VisibleForTesting
+    internal val forecastViewStateLive = MutableLiveData<ForecastViewState>()
 
     fun getForecastViewState(): LiveData<ForecastViewState> = forecastViewStateLive
 
