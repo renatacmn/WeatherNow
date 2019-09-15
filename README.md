@@ -1,3 +1,6 @@
+Solution to the following assignment:
+
+
 ## Assignment
 
 Create a simple one-activity app which displays the weather for the users' location. 
@@ -12,3 +15,11 @@ Use of third-party libraries should be kept to a minimum (including Architecture
 
 ### Delivery
 Once finished, deliver the result of the assignment either as project available on an open-source hosting provider such as GitHub or Bitbucket or as a zip file of the entire project.
+
+
+## Weather API
+To access the weather, you can use the following API:
+
+```http
+https://api.darksky.net/forecast/2bb07c3bece89caf533ac9a5d23d8417/latitude,longitude
+````
