@@ -23,3 +23,9 @@ To access the weather, you can use the following API:
 ```http
 https://api.darksky.net/forecast/2bb07c3bece89caf533ac9a5d23d8417/latitude,longitude
 ````
+
+### The Project
+
+- MVVM with ViewModel and LiveData
+- Retrofit/Moshi
+- Unit tests with Mockito
